@@ -1,12 +1,12 @@
 [user]
-	name = tsushiy
-	email = 28962399+tsushiy@users.noreply.github.com
+  name = tsushiy
+  email = 28962399+tsushiy@users.noreply.github.com
 
 [alias]
-	st = status
-	cm = commit -m
-	rs = reset --soft HEAD^
-	lg = log --graph --decorate=short --date=iso --pretty=format:'%C(green)%h %C(reset)[%cd] %C(blue)%cn %C(red)%d %C(reset)%s'
+  st = status
+  cm = commit -m
+  rs = reset --soft HEAD^
+  lg = log --graph --decorate=short --date=iso --pretty=format:'%C(green)%h %C(reset)[%cd] %C(blue)%cn %C(red)%d %C(reset)%s'
 
 [color]
   ui = auto
