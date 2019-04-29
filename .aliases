@@ -12,6 +12,8 @@ alias h='history'
 alias d='cd ~/Documents && la'
 alias dr='cd ~/Dropbox && la'
 alias ~='cd ~ && la'
+alias ..='cd ..'
+alias ...='cd ../..'
 
 # apt
 alias au='sudo apt update'
