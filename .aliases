@@ -1,0 +1,27 @@
+# ls
+alias ls='ls -F --color=auto'
+alias ll='ls -alh'
+alias la='ls -A'
+alias l='ls -CF'
+
+# screen
+alias c='clear'
+alias h='history'
+
+# cd
+alias d='cd ~/Documents && la'
+alias dr='cd ~/Dropbox && la'
+alias ~='cd ~ && la'
+
+# apt
+alias au='sudo apt update'
+alias ag='sudo apt upgrade'
+alias ai='sudo apt install'
+
+# git
+alias g='git'
+
+# safety
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
