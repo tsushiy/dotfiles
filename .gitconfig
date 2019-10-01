@@ -4,9 +4,11 @@
 
 [alias]
   st = status
+  b  = branch
   cm = commit -m
   rs = reset --soft HEAD^
   lg = log --graph --decorate=short --date=iso --pretty=format:'%C(green)%h %C(reset)[%cd] %C(blue)%cn %C(red)%d %C(reset)%s'
+  pom = push origin master
 
 [color]
   ui = auto

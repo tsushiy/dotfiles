@@ -1,19 +1,26 @@
 # ls
-alias ls='ls -F --color=auto'
+case "${OSTYPE}" in
+darwin*)
+  alias ls="ls -FG" ;;
+linux*)
+  alias ls='ls -F --color=auto' ;;
+esac
 alias ll='ls -alh'
 alias la='ls -A'
 alias l='ls -CF'
 
-# screen
-alias c='clear'
-alias h='history'
-
 # cd
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 alias d='cd ~/Documents && la'
 alias dr='cd ~/Dropbox && la'
 alias ~='cd ~ && la'
-alias ..='cd ..'
-alias ...='cd ../..'
+
+# screen
+alias c='clear'
+alias h='history'
 
 # apt
 alias au='sudo apt update'
