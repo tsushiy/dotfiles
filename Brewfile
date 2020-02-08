@@ -7,6 +7,7 @@ brew "gcc"
 brew "git"
 brew "mas"
 brew "python"
+brew "md5sha1sum"
 cask "docker"
 cask "google-chrome"
 cask "google-japanese-ime"
@@ -26,4 +27,4 @@ cask "visual-studio-code"
 cask "vlc"
 mas "Be Focused Pro", id: 961632517
 mas "Keynote", id: 409183694
-mas "Xcode", id: 497799835
+#mas "Xcode", id: 497799835

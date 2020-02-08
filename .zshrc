@@ -1,5 +1,7 @@
 autoload -Uz colors && colors
-PROMPT="%{$fg[green]%}%n@%m%{$fg[default]%}:%{$fg[blue]%}%~%{$fg[default]%}%(!.#.$) %{$reset_color%}"
+HOSTCOLOR=$'%{[38;5;'"$(printf "%d\n" 0x$(hostname|md5sum|cut -c1-2))"'m%}'
+USERCOLOR=$'%{[38;5;'"$(printf "%d\n" 0x$(echo $USERNAME|md5sum|cut -c1-2))"'m%}'
+PROMPT="%{$USERCOLOR%}%n%{$reset_color%}@%{$HOSTCOLOR%}%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}%(!.#.$) %{$reset_color%}"
 RPROMPT="%{$fg[cyan]%} %D{%Y/%m/%d} %* %{$reset_color%}"
 
 autoload -Uz compinit && compinit
