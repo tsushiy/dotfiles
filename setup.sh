@@ -22,9 +22,12 @@ for file in .??*; do
   ln -fvns "$DOTPATH/$file" "$HOME/$file"
 done
 
-if ! command -v brew >/dev/null 2>&1; then
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-brew bundle
+case "$OSTYPE" in
+  darwin*)
+    if ! command -v brew >/dev/null 2>&1; then
+      /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+    brew bundle ;;
+esac
 
 echo "All done!"
