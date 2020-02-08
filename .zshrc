@@ -1,8 +1,15 @@
 autoload -Uz colors && colors
-HOSTCOLOR=$'%{[38;5;'"$(printf "%d\n" 0x$(hostname|md5sum|cut -c1-2))"'m%}'
-USERCOLOR=$'%{[38;5;'"$(printf "%d\n" 0x$(echo $USERNAME|md5sum|cut -c1-2))"'m%}'
-PROMPT="%{$USERCOLOR%}%n%{$reset_color%}@%{$HOSTCOLOR%}%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}%(!.#.$) %{$reset_color%}"
-RPROMPT="%{$fg[cyan]%} %D{%Y/%m/%d} %* %{$reset_color%}"
+HOSTBGCOLORCODE=$(printf "%d\n" "215*(0x$(hostname|md5sum|cut -c1-2))/255.0+16")
+HOSTBGCOLOR=$'%{[48;5;'"$HOSTBGCOLORCODE"'m%}'
+#USERCOLOR=$'%{[38;5;'"$(printf "%d\n" 0x$(echo $USERNAME|md5sum|cut -c1-2))"'m%}'
+USERCOLOR=$'%{[38;5;183m%}'
+if [ "$(printf "%d" "((${HOSTBGCOLORCODE}-16)/18)%2")" -eq 1 ]; then
+  HOSTFGCOLOR=$'%{[38;5;232m%}'
+else
+  HOSTFGCOLOR=$'%{[38;5;255m%}'
+fi
+PROMPT="%{$USERCOLOR%}%n%{$reset_color%}@%{$HOSTFGCOLOR%}%{$HOSTBGCOLOR%}%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}%(!.#.$) %{$reset_color%}"
+RPROMPT="%{$fg[green]%} %D{%Y/%m/%d} %* %{$reset_color%}"
 
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
