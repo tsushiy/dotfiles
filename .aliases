@@ -34,3 +34,7 @@ alias g='git'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
+
+# ghq
+alias gcd='cd $(ghq list -p | peco)'
+alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
