@@ -1,0 +1,11 @@
+name: macOS
+
+on: [push]
+
+jobs:
+  macos:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dotfiles
+      run: ./setup.sh

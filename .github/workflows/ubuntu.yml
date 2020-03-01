@@ -1,0 +1,11 @@
+name: Ubuntu
+
+on: [push]
+
+jobs:
+  ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dotfiles
+      run: ./setup.sh
