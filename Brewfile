@@ -24,7 +24,7 @@ cask "slack"
 cask "spectacle"
 cask "spotify"
 #cask "steam"
-cask "virtualbox"
+#cask "virtualbox"
 cask "visual-studio-code"
 cask "vlc"
 #mas "Be Focused Pro", id: 961632517
