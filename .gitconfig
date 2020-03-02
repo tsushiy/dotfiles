@@ -15,3 +15,6 @@
 
 [core]
   excludesfile = ~/.gitignore_global
+
+[url "git@github.com:"]
+  pushInsteadOf = https://github.com/
