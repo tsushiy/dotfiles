@@ -38,3 +38,15 @@ setopt hist_reduce_blanks
 if [ -f ~/.aliases ]; then
   . ~/.aliases
 fi
+
+peco-src () {
+  local repo=$(ghq list | peco --query "$LBUFFER")
+  if [ -n "$repo" ]; then
+    repo=$(ghq list --full-path --exact $repo)
+    BUFFER="cd ${repo}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-src
+bindkey '^]' peco-src
