@@ -1,6 +1,6 @@
-PATH=/usr/local/bin:${PATH}
+PATH=/usr/local/bin:$PATH
+PATH=/usr/local/sbin:$PATH
 
-PATH=${PATH}:/usr/local/go/bin
-PATH=${PATH}:/usr/local/pypy/bin
-PATH=${PATH}:${HOME}/.nodebrew/current/bin
+PATH=$PATH:/usr/local/go/bin
+PATH=$PATH:$HOME/.nodebrew/current/bin
 export PATH
