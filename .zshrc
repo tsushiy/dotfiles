@@ -35,8 +35,8 @@ setopt append_history
 setopt inc_append_history
 setopt hist_reduce_blanks
 
-if [ -f ~/.aliases ]; then
-  . ~/.aliases
+if [ -f ~/.aliases.zsh ]; then
+  . ~/.aliases.zsh
 fi
 
 peco-src () {
