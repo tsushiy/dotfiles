@@ -40,10 +40,9 @@ if [ -f ~/.aliases.zsh ]; then
 fi
 
 peco-src () {
-  local repo=$(ghq list | peco --query "$LBUFFER")
-  if [ -n "$repo" ]; then
-    repo=$(ghq list --full-path --exact $repo)
-    BUFFER="cd ${repo}"
+  local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
     zle accept-line
   fi
   zle clear-screen

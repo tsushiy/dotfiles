@@ -7,16 +7,13 @@ linux*)
 esac
 alias ll='ls -alh'
 alias la='ls -A'
-alias l='ls -CF'
+alias l='ls -C'
 
 # cd
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias d='cd ~/Documents && la'
-alias dr='cd ~/Dropbox && la'
-alias ~='cd ~ && la'
+alias d='cd ~/Documents'
 
 # screen
 alias c='clear'
