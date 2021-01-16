@@ -50,3 +50,7 @@ peco-src () {
 }
 zle -N peco-src
 bindkey '^]' peco-src
+
+if [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  . /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
