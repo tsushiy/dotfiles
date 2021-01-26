@@ -1,0 +1,18 @@
+# see zshoptions
+
+unsetopt beep
+setopt print_eight_bit
+unsetopt flow_control
+unsetopt ignore_eof
+
+setopt auto_cd
+unsetopt auto_remove_slash
+
+setopt extended_history
+setopt hist_ignore_dups
+setopt share_history
+setopt append_history
+setopt inc_append_history
+setopt hist_reduce_blanks
+
+setopt prompt_subst

@@ -1,0 +1,73 @@
+# プロンプト設定
+() {
+  local user_color=183
+  local host_bgcolor=$(printf "%d" "215*(0x$(hostname|md5sum|cut -c1-2))/255.0+16")
+  local host_fgcolor
+  if [ "$(printf "%d" "((${host_bgcolor}-16)/18)%2")" -eq 1 ]; then
+    host_fgcolor=232
+  else
+    host_fgcolor=255
+  fi
+  local p_user="%F{${user_color}}%n%f"
+  local p_host="%F{${host_fgcolor}}%K{${host_bgcolor}}%m%f%k"
+  local p_dirpath="%{${fg[blue]}%}%~%f"
+  PROMPT="${p_user}@${p_host}:${p_dirpath}
+%# "
+  # RPROMPT="%{$fg[green]%}%D{%Y/%m/%d} %*%{${reset_color}%}"
+}
+
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' formats "%b"
+zstyle ':vcs_info:*' actionformats "%b|%a"
+add-zsh-hook precmd vcs_info
+
+# see https://kei-s.hatenadiary.jp/entry/20110215/1297789021
+vcs_info_for_git() {
+  if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" != "true" ]; then
+    return
+  fi
+
+  local VCS_GIT_PROMPT="${vcs_info_msg_0_}"
+  local VCS_GIT_PROMPT_CLEAN="%{${fg[green]}%}"
+  local VCS_GIT_PROMPT_DIRTY="%{${fg[yellow]}%}"
+
+  local VCS_GIT_PROMPT_ADDED="%{${fg[cyan]}%}A%{${reset_color}%}"
+  local VCS_GIT_PROMPT_MODIFIED="%{${fg[yellow]}%}M%{${reset_color}%}"
+  local VCS_GIT_PROMPT_UNTRACKED="%{${fg[red]}%}?%{${reset_color}%}"
+  local VCS_GIT_PROMPT_DELETED="%{${fg[red]}%}D%{${reset_color}%}"
+  local VCS_GIT_PROMPT_RENAMED="%{${fg[blue]}%}R%{${reset_color}%}"
+  local VCS_GIT_PROMPT_UNMERGED="%{${fg[magenta]}%}U%{${reset_color}%}"
+
+  local INDEX=$(git status --porcelain 2> /dev/null)
+  local STATUS
+  if [[ -z "$INDEX" ]];then
+    STATUS="${VCS_GIT_PROMPT_CLEAN}${VCS_GIT_PROMPT}%{${reset_color}%}"
+  else
+    STATUS=" ${VCS_GIT_PROMPT_DIRTY}${VCS_GIT_PROMPT}%{${reset_color}%}"
+    if $(echo "$INDEX" | grep '^UU ' &> /dev/null); then
+      STATUS="$VCS_GIT_PROMPT_UNMERGED$STATUS"
+    fi
+    if $(echo "$INDEX" | grep '^R ' &> /dev/null); then
+      STATUS="$VCS_GIT_PROMPT_RENAMED$STATUS"
+    fi
+    if $(echo "$INDEX" | grep '^ D ' &> /dev/null); then
+      STATUS="$VCS_GIT_PROMPT_DELETED$STATUS"
+    fi
+    if $(echo "$INDEX" | grep '^?? ' &> /dev/null); then
+      STATUS="$VCS_GIT_PROMPT_UNTRACKED$STATUS"
+    fi
+    if $(echo "$INDEX" | grep '^ M ' &> /dev/null); then
+      STATUS="$VCS_GIT_PROMPT_MODIFIED$STATUS"
+    fi
+    if $(echo "$INDEX" | grep '^A ' &> /dev/null); then
+      STATUS="$VCS_GIT_PROMPT_ADDED$STATUS"
+    elif $(echo "$INDEX" | grep '^M ' &> /dev/null); then
+      STATUS="$VCS_GIT_PROMPT_ADDED$STATUS"
+    fi
+  fi
+
+  local VCS_PROMPT_PREFIX="%{${fg[green]}%}[%{${reset_color}%}"
+  local VCS_PROMPT_SUFFIX="%{${fg[green]}%}]%{${reset_color}%}"
+  echo "${VCS_PROMPT_PREFIX}${STATUS}${VCS_PROMPT_SUFFIX}"
+}
+RPROMPT='$(vcs_info_for_git)'

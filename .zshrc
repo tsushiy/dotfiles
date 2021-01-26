@@ -1,55 +1,34 @@
-autoload -Uz colors && colors
-HOSTBGCOLORCODE=$(printf "%d\n" "215*(0x$(hostname|md5sum|cut -c1-2))/255.0+16")
-HOSTBGCOLOR=$'%{[48;5;'"$HOSTBGCOLORCODE"'m%}'
-#USERCOLOR=$'%{[38;5;'"$(printf "%d\n" 0x$(echo $USERNAME|md5sum|cut -c1-2))"'m%}'
-USERCOLOR=$'%{[38;5;183m%}'
-if [ "$(printf "%d" "((${HOSTBGCOLORCODE}-16)/18)%2")" -eq 1 ]; then
-  HOSTFGCOLOR=$'%{[38;5;232m%}'
-else
-  HOSTFGCOLOR=$'%{[38;5;255m%}'
-fi
-PROMPT="%{$USERCOLOR%}%n%{$reset_color%}@%{$HOSTFGCOLOR%}%{$HOSTBGCOLOR%}%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}%(!.#.$) %{$reset_color%}"
-RPROMPT="%{$fg[green]%} %D{%Y/%m/%d} %* %{$reset_color%}"
+ZSHHOME="${HOME}/.zsh"
 
-autoload -Uz compinit && compinit
-zstyle ':completion:*' menu select
-zstyle ':completion:*' list-colors "${LS_COLORS}"
-zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
-LISTMAX=1000
+source_file() {
+  local file_path=$1
+  if [ -f "${file_path}" ]; then
+    . "${file_path}"
+  fi
+}
 
+source_file "${ZSHHOME}/.zfunctions"
+source_file "${ZSHHOME}/.zaliases"
+source_file "${ZSHHOME}/.zoptions"
+source_file "${ZSHHOME}/.zprompt"
+
+source_file "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source_file "${HOME}/.iterm2_shell_integration.zsh"
+
+# emacsモード
 bindkey -e
 
-setopt print_eight_bit
-setopt no_flow_control
-unsetopt ignore_eof
+# ヒストリー
+HISTFILE="${HOME}/.zsh_history"
+HISTSIZE=100000
+SAVEHIST=100000
 
-setopt auto_cd
-setopt noautoremoveslash
+# 補完
+LISTMAX=1000
+zstyle ':completion:*:default' menu select=1
+zstyle ':completion:*' list-colors "${LS_COLORS}"
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt hist_ignore_dups
-setopt share_history
-setopt append_history
-setopt inc_append_history
-setopt hist_reduce_blanks
-
-if [ -f ~/.aliases.zsh ]; then
-  . ~/.aliases.zsh
-fi
-
-peco-src () {
-  local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
-  if [ -n "$selected_dir" ]; then
-    BUFFER="cd ${selected_dir}"
-    zle accept-line
-  fi
-  zle clear-screen
-}
-zle -N peco-src
-bindkey '^]' peco-src
-
-if [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  . /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
+# 環境変数の重複を削除
+typeset -U path PATH

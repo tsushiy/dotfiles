@@ -1,9 +1,11 @@
 # ls
 case "${OSTYPE}" in
-darwin*)
-  alias ls="ls -FG" ;;
-linux*)
-  alias ls='ls -F --color=auto' ;;
+  darwin*)
+    alias ls="ls -FG"
+    ;;
+  linux*)
+    alias ls='ls -F --color=auto'
+    ;;
 esac
 alias ll='ls -alh'
 alias la='ls -A'
@@ -16,7 +18,6 @@ alias ....='cd ../../..'
 alias d='cd ~/Documents'
 
 # screen
-alias c='clear'
 alias h='history'
 
 # apt
