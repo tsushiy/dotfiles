@@ -4,3 +4,5 @@ PATH=/usr/local/bin:/usr/local/sbin:$PATH
 PATH=$PATH:/usr/local/go/bin
 PATH=$PATH:$HOME/.nodebrew/current/bin
 export PATH
+
+export FZF_DEFAULT_OPTS='--height 80% --reverse --border'

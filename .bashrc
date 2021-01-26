@@ -102,3 +102,5 @@ fi
 if [ -f ~/.zsh/.zaliases ]; then
   . ~/.zsh/.zaliases
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

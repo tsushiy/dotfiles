@@ -15,6 +15,10 @@ source_file "${ZSHHOME}/.zprompt"
 source_file "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source_file "${HOME}/.iterm2_shell_integration.zsh"
 
+# fzf の補完, キーバインド
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+bindkey -r '\ec' # ALT-C のバインドを解除
+
 # emacsモード
 bindkey -e
 
