@@ -1,4 +1,5 @@
 " File
+set enc=utf-8
 set fenc=utf-8
 set noswapfile
 set nobackup
