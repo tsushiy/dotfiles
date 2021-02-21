@@ -83,4 +83,4 @@ fzf-cdr() {
   zle reset-prompt
 }
 zle -N fzf-cdr
-bindkey '^e' fzf-cdr
+bindkey '^n' fzf-cdr
