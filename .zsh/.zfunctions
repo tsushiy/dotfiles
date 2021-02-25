@@ -75,12 +75,10 @@ zle -N fzf-ghq
 bindkey '^]' fzf-ghq
 
 fzf-cdr() {
-  local selected_dir=$(cdr -l | sed 's/^[0-9]* *//' | fzf --query "$LBUFFER")
+  local selected_dir=$(cdr -l | sed 's/^[0-9]* *//' | fzf)
+  selected_dir=`echo ${selected_dir/\~/$HOME}`
   if [ -n "${selected_dir}" ]; then
-    BUFFER="cd ${selected_dir}"
-    zle accept-line
+    cd ${selected_dir}
   fi
-  zle reset-prompt
 }
-zle -N fzf-cdr
-bindkey '^n' fzf-cdr
+alias cdd="fzf-cdr"
