@@ -36,3 +36,7 @@ alias rm='rm -i'
 # ghq
 alias gcd='cd $(ghq list -p | peco)'
 alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
+
+# docker
+alias dcu='docker-compose up'
+alias dcr='docker-compose run --rm'
