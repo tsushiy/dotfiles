@@ -34,8 +34,8 @@ alias mv='mv -i'
 alias rm='rm -i'
 
 # ghq
-alias gcd='cd $(ghq list -p | peco)'
-alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
+alias gcd='cd $(ghq list -p | fzf)'
+alias gh='hub browse $(ghq list | fzf | cut -d "/" -f 2,3)'
 
 # docker
 alias dcu='docker-compose up'
