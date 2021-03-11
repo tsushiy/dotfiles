@@ -18,6 +18,10 @@ if which rbenv > /dev/null; then
   eval "$(rbenv init -)"
 fi
 
+if [[ $(docker-machine status default 2> /dev/null) = "Running" ]] ; then
+  eval $(docker-machine env default)
+fi
+
 # fzf の補完, キーバインド
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 bindkey -r '\ec' # ALT-C のバインドを解除
