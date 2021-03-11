@@ -14,6 +14,11 @@ source_file "${ZSHHOME}/.zprompt"
 
 source_file "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source_file "${HOME}/.iterm2_shell_integration.zsh"
+
+if which pyenv > /dev/null; then
+  eval "$(pyenv init -)"
+fi
+
 if which rbenv > /dev/null; then
   eval "$(rbenv init -)"
 fi
