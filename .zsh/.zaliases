@@ -35,7 +35,7 @@ alias rm='rm -i'
 
 # ghq
 alias gcd='cd $(ghq list -p | fzf)'
-alias gh='hub browse $(ghq list | fzf | cut -d "/" -f 2,3)'
+alias ghv='gh repo view -w $(ghq list | fzf | cut -d "/" -f 2,3)'
 
 # docker
 alias dcu='docker-compose up'
