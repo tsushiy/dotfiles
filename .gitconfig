@@ -5,6 +5,8 @@
 [alias]
   st = status
   b  = branch
+  d  = diff
+  f  = fetch
   cm = commit -m
   co = checkout
   rs = reset --soft HEAD^
