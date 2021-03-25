@@ -68,8 +68,31 @@ vcs_info_for_git() {
     fi
   fi
 
+  local VCS_GIT_PROMPT_AHEAD="%{${fg[green]}%}"
+  local VCS_GIT_PROMPT_BEHIND="%{${fg[red]}%}"
+
+  local UPSTREAM=$(git rev-parse --abbrev-ref @{upstream} 2> /dev/null)
+  if [[ -n "$UPSTREAM" ]]; then
+    UPSTREAM="...%{${fg[red]}%}${UPSTREAM}%{${reset_color}%}"
+    local COMMIT_COUNT=$(git rev-list --count --left-right @{upstream}...HEAD 2> /dev/null)
+    case "$COMMIT_COUNT" in
+      "0	0")
+        ;;
+      "0	"*)
+        UPSTREAM+=" [ahead ${VCS_GIT_PROMPT_AHEAD}${COMMIT_COUNT#0	}%{${reset_color}%}]"
+        ;;
+      *"	0")
+        UPSTREAM+=" [behind ${VCS_GIT_PROMPT_BEHIND}${COMMIT_COUNT%	0}%{${reset_color}%}]"
+        ;;
+      *)
+        UPSTREAM+=" [ahead ${VCS_GIT_PROMPT_AHEAD}${COMMIT_COUNT#*	}%{${reset_color}%}"
+        UPSTREAM+=", behind ${VCS_GIT_PROMPT_BEHIND}${COMMIT_COUNT%	*}%{${reset_color}%}]"
+        ;;
+    esac
+  fi
+
   local VCS_PROMPT_PREFIX="%{${fg[green]}%}[%{${reset_color}%}"
   local VCS_PROMPT_SUFFIX="%{${fg[green]}%}]%{${reset_color}%}"
-  echo "${VCS_PROMPT_PREFIX}${STATUS}${VCS_PROMPT_SUFFIX}"
+  echo "${VCS_PROMPT_PREFIX}${STATUS}${UPSTREAM}${VCS_PROMPT_SUFFIX}"
 }
 RPROMPT='$(vcs_info_for_git)'
