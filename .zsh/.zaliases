@@ -42,3 +42,8 @@ alias ghv='gh repo view -w $(ghq list | fzf | cut -d "/" -f 2,3)'
 # docker
 alias dcu='docker-compose up'
 alias dcr='docker-compose run --rm'
+alias dce='docker-compose exec'
+alias dcd='docker-compose down'
+
+# grep
+alias grep='grep --color=auto'

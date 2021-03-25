@@ -3,14 +3,35 @@
   email = 28962399+tsushiy@users.noreply.github.com
 
 [alias]
-  st = status
+  aliases = !git config --get-regexp alias | grep -v aliases | sed 's/^alias.//g' | sed 's/ / = /1'
+  me = !git config --get-regexp '^user'
+
+  st = status --short --branch
   b  = branch
   d  = diff
   f  = fetch
+  force-pull = !git fetch && git reset --hard $(git rev-parse --abbrev-ref @{upstream})
+  sta = stash
+
   cm = commit -m
+  amend = commit --amend
+  fixup = commit --fixup
+
+  rb = rebase
+  rbi = rebase --interactive
+  rba = rebase --abort
+  rbc = rebase --continue
+
   co = checkout
-  rs = reset --soft HEAD^
-  lg = log --graph --decorate=short --date=iso --pretty=format:'%C(green)%h %C(reset)[%cd] %C(blue)%cn %C(red)%d %C(reset)%s'
+  s  = switch
+
+  lg = log --graph --decorate=short --date=format-local:'%Y/%m/%d %H:%M:%S' --pretty=format:'%C(green)%h%C(reset) %C(magenta)[%ad]%C(reset) %C(blue)%an%C(reset) %s%C(auto)%d%C(reset)'
+  lgr = lg --remotes --branches
+  lgs = log --no-merges --name-status --date=format-local:'%Y/%m/%d %H:%M:%S' --pretty=format:'%C(green)%h%C(reset) %C(magenta)[%ad]%C(reset) %C(blue)%an%C(reset) %s%C(auto)%d%C(reset)'
+
+  unstage  = reset --mixed HEAD --
+  uncommit = reset --mixed HEAD~ --
+  discard  = reset --hard HEAD --
 
 [color]
   ui = auto
