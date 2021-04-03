@@ -17,7 +17,10 @@ alias l='ls -C'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias d='cd ~/Documents'
+
+#diff
+alias di='diff'
+alias cdi='colordiff'
 
 # screen
 alias h='history'
@@ -40,6 +43,8 @@ alias gcd='cd $(ghq list -p | fzf)'
 alias ghv='gh repo view -w $(ghq list | fzf | cut -d "/" -f 2,3)'
 
 # docker
+alias dm='docker-machine'
+alias dc='docker-compose'
 alias dcu='docker-compose up'
 alias dcr='docker-compose run --rm'
 alias dce='docker-compose exec'
