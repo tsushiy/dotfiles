@@ -28,11 +28,18 @@ done
 # Install Homebrew
 case "${OSTYPE}" in
   darwin*)
-    if ! command -v brew > /dev/null 2>&1; then
+    if ! type brew &>/dev/null; then
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
+
     if [ "${CI:-unknown}" == unknown ]; then
-      brew bundle
+      local UNAME_MACHINE="$(/usr/bin/uname -m)"
+
+      if [[ "$UNAME_MACHINE" == "arm64" ]]; then
+        brew bundle -v --file './Brewfile-arm.rb'
+      else
+        brew bundle -v --file './Brewfile-intel.rb'
+      fi
     fi
     ;;
 esac
