@@ -9,6 +9,8 @@ export PATH
 
 export FZF_DEFAULT_OPTS='--height 80% --reverse --border'
 
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+
 if [[ -f "/usr/local/bin/brew" ]]; then
   eval "$(/usr/local/bin/brew shellenv)"
 fi

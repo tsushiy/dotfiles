@@ -20,6 +20,8 @@ source_file "${HOME}/.iterm2_shell_integration.zsh"
 source_file "/usr/share/doc/fzf/examples/key-bindings.zsh"
 source_file "/usr/share/doc/fzf/examples/completion.zsh"
 
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
 if which pyenv > /dev/null; then
   eval "$(pyenv init -)"
 fi
