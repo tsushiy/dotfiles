@@ -22,3 +22,9 @@ fi
 if type brew &>/dev/null; then
   export FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if type pyenv &>/dev/null; then
+  eval "$(pyenv init --path)"
+fi
