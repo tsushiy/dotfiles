@@ -20,6 +20,9 @@ source_file "${HOME}/.iterm2_shell_integration.zsh"
 source_file "/usr/share/doc/fzf/examples/key-bindings.zsh"
 source_file "/usr/share/doc/fzf/examples/completion.zsh"
 
+source_file "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source_file "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 if which pyenv > /dev/null; then
