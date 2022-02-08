@@ -1,6 +1,6 @@
 [user]
   name = tsushiy
-  email = 28962399+tsushiy@users.noreply.github.com
+  email = tsushiy.jp@gmail.com
 
 [alias]
   aliases = !git config --get-regexp alias | grep -v aliases | sed 's/^alias.//g' | sed 's/ / = /1'
