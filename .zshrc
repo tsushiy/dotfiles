@@ -11,6 +11,7 @@ source_file "${ZSHHOME}/.zfunctions"
 source_file "${ZSHHOME}/.zaliases"
 source_file "${ZSHHOME}/.zoptions"
 source_file "${ZSHHOME}/.zprompt"
+source_file "${HOME}/.zshrc_work"
 
 if which brew > /dev/null; then
   source_file "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
