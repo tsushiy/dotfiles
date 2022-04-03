@@ -28,4 +28,5 @@ if type pyenv &>/dev/null; then
 fi
 
 PATH=$HOME/.nodebrew/current/bin:$PATH
+PATH=$HOME/.local/bin:$PATH
 export PATH
