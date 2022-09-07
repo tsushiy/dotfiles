@@ -8,9 +8,12 @@
 
   st = status --short --branch
   b  = branch
+  bp = !git branch | egrep -v '[+*]' | xargs git branch -D
   d  = diff
-  f  = fetch
+  f  = fetch --prune
+  p  = pull --prune
   force-pull = !git fetch && git reset --hard $(git rev-parse --abbrev-ref @{upstream})
+  push-up = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
   sta = stash
 
   cm = commit -m
@@ -19,8 +22,13 @@
 
   rb = rebase
   rbi = rebase --interactive
+  rbsq = rbi --autosquash
   rba = rebase --abort
   rbc = rebase --continue
+
+  cp = cherry-pick
+  cpa = cherry-pick --abort
+  cpc = cherry-pick --continue
 
   co = checkout
   s  = switch
