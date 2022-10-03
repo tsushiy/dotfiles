@@ -2,6 +2,9 @@
   name = tsushiy
   email = tsushiy.jp@gmail.com
 
+[init]
+  defaultBranch = main
+
 [alias]
   aliases = !git config --get-regexp alias | grep -v aliases | sed 's/^alias.//g' | sed 's/ / = /1'
   me = !git config --get-regexp '^user'
