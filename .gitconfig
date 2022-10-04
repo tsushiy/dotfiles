@@ -35,6 +35,7 @@
 
   co = checkout
   s  = switch
+  genb = !git switch -c $(git config user.name)_$(date +'%Y%m%d')_$(cat /dev/urandom | head -c 50 | sha1sum | head -c 10)
 
   lg = log --graph --decorate=short --date=format-local:'%Y/%m/%d %H:%M:%S' --pretty=format:'%C(green)%h%C(reset) %C(magenta)[%ad]%C(reset) %C(blue)%an%C(reset) %s%C(auto)%d%C(reset)'
   lgr = lg --remotes --branches
