@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -eu
+
+curl -sL "https://www.toptal.com/developers/gitignore/api/$@"
