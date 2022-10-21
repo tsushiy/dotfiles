@@ -1,30 +1,29 @@
+# PATH
+export PYENV_ROOT="$HOME/.pyenv"
+
+typeset -gx -U path fpath manpath
+path=(
+  $HOME/.local/bin(N-/)
+  $HOME/.nodebrew/current/bin(N-/)
+  $PYENV_ROOT/bin(N-/)
+  /usr/local/bin(N-/)
+  /usr/local/sbin(N-/)
+  $path
+  /usr/local/go/bin(N-/)
+)
+
 export LANG=ja_JP.UTF-8
 
-PATH=/usr/local/bin:/usr/local/sbin:$PATH
-PATH=$PATH:/usr/local/go/bin
+# Homebrew
+[[ -f "/usr/local/bin/brew" ]] && eval "$(/usr/local/bin/brew shellenv)"
+[[ -f "/opt/homebrew/bin/brew" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+if where brew &>/dev/null; then
+  fpath=(
+    $(brew --prefix)/share/zsh/site-functions(N-/)
+    $fpath
+  )
+fi
 
-export FZF_DEFAULT_OPTS='--height 80% --reverse --border'
-
+# Language
+where pyenv &>/dev/null && eval "$(pyenv init --path)"
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-
-if [[ -f "/usr/local/bin/brew" ]]; then
-  eval "$(/usr/local/bin/brew shellenv)"
-fi
-
-if [[ -f "/opt/homebrew/bin/brew" ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-if type brew &>/dev/null; then
-  export FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-fi
-
-export PYENV_ROOT="$HOME/.pyenv"
-PATH="$PYENV_ROOT/bin:$PATH"
-if type pyenv &>/dev/null; then
-  eval "$(pyenv init --path)"
-fi
-
-PATH=$HOME/.nodebrew/current/bin:$PATH
-PATH=$HOME/.local/bin:$PATH
-export PATH

@@ -26,9 +26,9 @@ for file in .??*; do
 done
 
 # Install Homebrew
-case "${OSTYPE}" in
-  darwin*)
-    if ! type brew &>/dev/null; then
+case "$(uname)" in
+  "Darwin")
+    if ! where brew &>/dev/null; then
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
 

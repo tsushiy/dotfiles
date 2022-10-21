@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# see zshoptions
+# See zshoptions
 
 unsetopt beep
 setopt print_eight_bit
