@@ -5,6 +5,8 @@
 
 ### One-liner Install
 
-```sh
+CAUTION: This command replaces your dotfiles.
+
+```bash
 bash -c "$(curl -L https://raw.githubusercontent.com/tsushiy/dotfiles/master/setup.sh)"
 ```
