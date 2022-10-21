@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 export LANG=ja_JP.UTF-8
 
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
