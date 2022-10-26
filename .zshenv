@@ -23,7 +23,7 @@ export LANG=ja_JP.UTF-8
 [[ -f "/usr/local/bin/brew" ]] && eval "$(/usr/local/bin/brew shellenv)"
 [[ -f "/opt/homebrew/bin/brew" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-if where brew &>/dev/null; then
+if which brew &> /dev/null; then
   fpath=(
     $fpath
     $(brew --prefix)/share/zsh/site-functions(N-/)
@@ -31,5 +31,5 @@ if where brew &>/dev/null; then
 fi
 
 # Language
-where pyenv &>/dev/null && eval "$(pyenv init --path)"
+which pyenv &> /dev/null && eval "$(pyenv init --path)"
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
