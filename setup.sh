@@ -10,7 +10,7 @@ else
   echo "${DOTPATH} already exists."
   cd "${DOTPATH}"
   git stash
-  git pull origin master
+  git pull origin
 fi
 
 cd "${DOTPATH}"
@@ -26,20 +26,29 @@ for file in .??*; do
 done
 
 # Install Homebrew
-case "$(uname)" in
-  "Darwin")
-    if ! where brew &>/dev/null; then
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    fi
+install_homebrew() {
+  if ! which brew &> /dev/null; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+}
 
+case "$(uname -sm)" in
+  "Darwin x86_64")
+    install_homebrew
     if [ "${CI:-unknown}" == unknown ]; then
-      local UNAME_MACHINE="$(/usr/bin/uname -m)"
-
-      if [[ "$UNAME_MACHINE" == "arm64" ]]; then
-        brew bundle -v --file './Brewfile-arm.rb'
-      else
-        brew bundle -v --file './Brewfile-intel.rb'
-      fi
+      brew bundle -v --file './Brewfile-intel.rb'
+    fi
+    ;;
+  "Darwin arm64")
+    install_homebrew
+    if [ "${CI:-unknown}" == unknown ]; then
+      brew bundle -v --file './Brewfile-arm.rb'
+    fi
+    ;;
+  "Linux x86_64")
+    install_homebrew
+    if [ "${CI:-unknown}" == unknown ]; then
+      brew bundle -v --file './Brewfile-linux.rb'
     fi
     ;;
 esac
