@@ -10,7 +10,7 @@ else
   echo "${DOTPATH} already exists."
   cd "${DOTPATH}"
   git stash
-  git pull origin master
+  git pull origin
 fi
 
 cd "${DOTPATH}"
