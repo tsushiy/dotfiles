@@ -1,8 +1,7 @@
-name: Ubuntu
+name: test
 
 on:
   pull_request:
-    types: [opened, synchronize]
   push:
     branches: [master]
 
@@ -11,8 +10,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  ubuntu:
-    runs-on: ubuntu-latest
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
     steps:
     - uses: actions/checkout@v2
     - name: Install dotfiles
