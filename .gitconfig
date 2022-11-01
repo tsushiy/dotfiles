@@ -12,7 +12,7 @@
 
   st = status --short --branch
   b  = branch
-  bp = !git branch | egrep -v '[+*]' | xargs git branch -D
+  bp = !git branch | egrep -v '^[+*]| (master|main)$' | xargs git branch -D
   d  = diff
   f  = fetch --prune
   p  = pull --prune
@@ -26,7 +26,6 @@
 
   rb = rebase
   rbi = rebase --interactive
-  rbsq = rbi --autosquash
   rba = rebase --abort
   rbc = rebase --continue
 
@@ -61,6 +60,9 @@
 
 [tag]
   gpgsign = true
+
+[rebase]
+  autosquash = true
 
 [url "git@github.com:"]
   pushInsteadOf = https://github.com/
