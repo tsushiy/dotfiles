@@ -1,6 +1,7 @@
 [user]
   name = tsushiy
   email = tsushiy.jp@gmail.com
+  signingkey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGRYffCUoVDQSpAgG4d/vdKAuWTryi2c8flJv9JzdBEv
 
 [init]
   defaultBranch = main
@@ -51,6 +52,15 @@
 [core]
   excludesfile = ~/.gitignore_global
   editor = vim
+
+[gpg]
+  format = ssh
+
+[commit]
+  gpgsign = true
+
+[tag]
+  gpgsign = true
 
 [url "git@github.com:"]
   pushInsteadOf = https://github.com/
