@@ -22,6 +22,7 @@ for file in .??*; do
   [[ "${file}" == ".DS_Store" ]] && continue
   [[ "${file}" == ".github" ]] && continue
   [[ "${file}" == ".vscode" ]] && continue
+  [[ "${REMOTE_CONTAINERS:-unknown}" == "true" && "${file}" == ".gitconfig" ]] && continue
   ln -fvns "${DOTPATH}/${file}" "${HOME}/${file}"
 done
 
@@ -32,25 +33,27 @@ install_homebrew() {
   fi
 }
 
-case "$(uname -sm)" in
-  "Darwin x86_64")
-    install_homebrew
-    if [ "${CI:-unknown}" == unknown ]; then
-      brew bundle -v --file './Brewfile-intel.rb'
-    fi
-    ;;
-  "Darwin arm64")
-    install_homebrew
-    if [ "${CI:-unknown}" == unknown ]; then
-      brew bundle -v --file './Brewfile-arm.rb'
-    fi
-    ;;
-  "Linux x86_64")
-    install_homebrew
-    if [ "${CI:-unknown}" == unknown ]; then
-      brew bundle -v --file './Brewfile-linux.rb'
-    fi
-    ;;
-esac
+if [[ "${REMOTE_CONTAINERS:-unknown}" != "true" ]]; then
+  case "$(uname -sm)" in
+    "Darwin x86_64")
+      install_homebrew
+      if [ "${CI:-unknown}" == unknown ]; then
+        brew bundle -v --file './Brewfile-intel.rb'
+      fi
+      ;;
+    "Darwin arm64")
+      install_homebrew
+      if [ "${CI:-unknown}" == unknown ]; then
+        brew bundle -v --file './Brewfile-arm.rb'
+      fi
+      ;;
+    "Linux x86_64")
+      install_homebrew
+      if [ "${CI:-unknown}" == unknown ]; then
+        brew bundle -v --file './Brewfile-linux.rb'
+      fi
+      ;;
+  esac
+fi
 
 echo "Setup done."

@@ -1,6 +1,7 @@
 [user]
   name = tsushiy
   email = tsushiy.jp@gmail.com
+  signingkey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGRYffCUoVDQSpAgG4d/vdKAuWTryi2c8flJv9JzdBEv
 
 [init]
   defaultBranch = main
@@ -11,7 +12,7 @@
 
   st = status --short --branch
   b  = branch
-  bp = !git branch | egrep -v '[+*]' | xargs git branch -D
+  bp = !git branch | egrep -v '^[+*]| (master|main)$' | xargs git branch -D
   d  = diff
   f  = fetch --prune
   p  = pull --prune
@@ -25,7 +26,6 @@
 
   rb = rebase
   rbi = rebase --interactive
-  rbsq = rbi --autosquash
   rba = rebase --abort
   rbc = rebase --continue
 
@@ -51,6 +51,18 @@
 [core]
   excludesfile = ~/.gitignore_global
   editor = vim
+
+[gpg]
+  format = ssh
+
+[commit]
+  gpgsign = true
+
+[tag]
+  gpgsign = true
+
+[rebase]
+  autosquash = true
 
 [url "git@github.com:"]
   pushInsteadOf = https://github.com/
